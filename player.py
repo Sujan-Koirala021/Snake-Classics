@@ -1,4 +1,3 @@
-from email.errors import HeaderParseError
 import pygame
 
 
@@ -39,8 +38,14 @@ class Player:
 
     def drawSnake(self, surface):
         green = (0, 255, 0)
+        red = (255, 0, 0)
+
         for item in self.bodyCoordinates:
-            pygame.draw.rect(surface, green, pygame.Rect(item[0],item[1], 20, 20)) #   20 width and height
+            if (item == self.bodyCoordinates[0]):
+                color = red
+            else:
+                color = green
+            pygame.draw.rect(surface, color, pygame.Rect(item[0],item[1], 20, 20)) #   20 width and height
         
     def increaseLength(self):
         if (self.direction == "right"):
@@ -67,3 +72,8 @@ class Player:
         if self.headPos == [foodObj.x, foodObj.y]:
             foodObj.changeFoodPos()
             self.increaseLength()
+            
+    def gameOver(self):
+        for item in self.bodyCoordinates[1:]:
+            if item == self.bodyCoordinates[0]:
+                print("Game Over") 

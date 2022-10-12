@@ -25,6 +25,7 @@ while(True):
     snake.drawSnake(window.getWindow())
     snake.moveSnake()
     snake.collidesFood(food)
+    snake.gameOver()
     for event in pygame.event.get():
         if (event.type == QUIT):
             pygame.quit()

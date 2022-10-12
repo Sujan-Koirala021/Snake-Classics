@@ -11,6 +11,7 @@ class Food:
     def __init__(self):
         (self.x , self.y) = (random.randrange(0, 800 - 40, 20), random.randrange(0,  600 - 40, 20))
 
+        
     def changeFoodPos(self):
         (self.x , self.y) = (random.randrange(0, 800 - 40, 20), random.randrange(0,  600 - 40, 20))
         
