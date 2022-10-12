@@ -5,6 +5,7 @@ import window, food, player
 
 from pygame.locals import *
 (WIDTH, HEIGHT) = (800, 600)
+TILE = 20
 
 #   Frame per second(FPS) 
 clock = pygame.time.Clock()
@@ -18,14 +19,26 @@ window.setWindow()
 snake = player.Player()
 
 food = food.Food()
+
+
+def drawBoundary():
+    boundaryColor = (0, 0, 255)
+    pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0,0, WIDTH- TILE, 20)) #   20 width and height
+    pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0, HEIGHT - TILE, WIDTH, 20)) #   20 width and height
+    pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0,0, 20, HEIGHT)) #   20 width and height
+    pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(WIDTH- TILE,0, 20, HEIGHT)) #   20 width and height
+
+    
+
 while(True):
     
     window.getWindow().fill((0, 0, 0 ))
+    drawBoundary()
     food.drawFood(window.getWindow())
     snake.drawSnake(window.getWindow())
     snake.moveSnake()
     snake.collidesFood(food)
-    snake.gameOver()
+    snake.gameOver(TILE, WIDTH, HEIGHT)
     for event in pygame.event.get():
         if (event.type == QUIT):
             pygame.quit()

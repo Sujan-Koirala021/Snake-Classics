@@ -73,7 +73,14 @@ class Player:
             foodObj.changeFoodPos()
             self.increaseLength()
             
-    def gameOver(self):
+    def gameOver(self, tile, width, height):
         for item in self.bodyCoordinates[1:]:
             if item == self.bodyCoordinates[0]:
                 print("Game Over") 
+                
+        [headX, headY] = self.headPos
+        if (headX < 20 or headX>(width - tile)):
+            print("Game Over 2")
+            
+        if (headY < 20 or headY>(height - tile)):
+            print("Game Over 3")
