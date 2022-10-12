@@ -7,6 +7,7 @@ class Player:
     headPos = [60, 30]
     bodyCoordinates = [[60, 30], [40, 30], [20, 30]]
     direction = "down"
+    newDirection = "down" 
     
     def __init__(self):
         pass

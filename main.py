@@ -29,26 +29,25 @@ while(True):
     
         #   Check for keypress
         if user_input[K_RIGHT]:
-            snake.direction = "right"
-            pass
-            # playerObj.movesTo = "right"
+            snake.newDirection = "right"
+            if snake.direction != "left":
+                snake.direction = snake.newDirection
                         
         if user_input[K_LEFT]:
-            snake.direction = "left"
-            pass
-            # playerObj.movesTo = "left"
-            
+            snake.newDirection = "left"
+            if snake.direction != "right":
+                snake.direction = snake.newDirection
 
         if user_input[K_UP]:
-            snake.direction = "up"
-            pass
-            # playerObj.movesTo = "up"
-                
+            snake.newDirection = "up"
+            if snake.direction != "down":
+                snake.direction = snake.newDirection
+
         if user_input[K_DOWN]:
-            snake.direction = "down"
-            pass
-            # playerObj.movesTo = "down"
-        
+            snake.newDirection = "down"
+            if snake.direction != "up":
+                snake.direction = snake.newDirection
+
     window.updateWindow()
         
     #   Fps or refresh rate
