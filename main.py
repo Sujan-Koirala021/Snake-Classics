@@ -7,7 +7,10 @@ from pygame.locals import *
 (WIDTH, HEIGHT) = (800, 600)
 
 #   Frame per second(FPS) 
-fps = pygame.time.Clock()
+clock = pygame.time.Clock()
+fps = 15
+
+lastTime = time.time()
 
 #   Set window
 window.setWindow()
@@ -16,10 +19,12 @@ snake = player.Player()
 
 food = food.Food()
 while(True):
+    
     window.getWindow().fill((0, 0, 0 ))
     food.drawFood(window.getWindow())
     snake.drawSnake(window.getWindow())
     snake.moveSnake()
+    snake.collidesFood(food)
     for event in pygame.event.get():
         if (event.type == QUIT):
             pygame.quit()
@@ -51,4 +56,4 @@ while(True):
     window.updateWindow()
         
     #   Fps or refresh rate
-    fps.tick(15)
+    clock.tick(fps)
