@@ -1,7 +1,7 @@
 import pygame, sys
 import time
 #  Import window.py
-import window, events, food, player 
+import window, food, player 
 
 from pygame.locals import *
 (WIDTH, HEIGHT) = (800, 600)
@@ -11,41 +11,38 @@ fps = pygame.time.Clock()
 
 #   Set window
 window.setWindow()
-playerObj = player.Snake(window.getWindow())
-
 
 food = food.Food()
 while(True):
     window.getWindow().fill((0, 0, 0 ))
-    food.drawFood(window.getWindow())
-    
-    
-    events.quitEvent()
-    events.keyPress(playerObj)
-    
-    playerObj.drawSnake()
-    playerObj.moveSnake()
-    print(playerObj.snake_body)
-    playerObj.checkBoundary(WIDTH, HEIGHT)
+    # food.drawFood(window.getWindow())
 
-    #   Increase length after eating food
-    # if (playerObj.hasCollided(food)):
-    #     headDir = playerObj.getHeadDirection()
-
-    #     if headDir == "right":
-    #         (x, y) = (playerObj.getHeadX()+20, playerObj.getHeadY())
-        
-    #     elif headDir == "left":
-    #         (x, y) = (playerObj.getHeadX()-20, playerObj.getHeadY())
-        
-    #     elif headDir == "up":
-    #         (x, y) = (playerObj.getHeadX(), playerObj.getHeadY() - 20)
+    for event in pygame.event.get():
+        if (event.type == QUIT):
+            pygame.quit()
+            sys.exit()
             
-    #     else:
-            # (x, y) = (playerObj.getHeadX(), playerObj.getHeadY() + 20)
+        user_input = pygame.key.get_pressed()
+    
+        #   Check for keypress
+        if user_input[K_RIGHT]:
+            pass
+            # playerObj.movesTo = "right"
+                        
+        if user_input[K_LEFT]:
+            pass
+            # playerObj.movesTo = "left"
+            
 
+        if user_input[K_UP]:
+            pass
+            # playerObj.movesTo = "up"
+                
+        if user_input[K_DOWN]:
+            pass
+            # playerObj.movesTo = "down"
         
     window.updateWindow()
-    
+        
     #   Fps or refresh rate
     fps.tick(15)
