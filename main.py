@@ -15,7 +15,7 @@ window.setWindow()
 food = food.Food()
 while(True):
     window.getWindow().fill((0, 0, 0 ))
-    # food.drawFood(window.getWindow())
+    food.drawFood(window.getWindow())
 
     for event in pygame.event.get():
         if (event.type == QUIT):
