@@ -1,4 +1,5 @@
 import pygame
+import assets
 
 
 class Player:
@@ -11,6 +12,13 @@ class Player:
     def __init__(self):
         pass
     
+    def resetSnake(self):
+        self.velocity = 20
+        self.headPos = [60, 20]
+        self.bodyCoordinates = [[60, 20], [40, 20], [20, 20]]
+        self.direction = "down"
+        self.newDirection = "down" 
+        
     def moveSnake(self):
         if (self.direction == "right"):
             del self.bodyCoordinates[-1]
@@ -68,19 +76,28 @@ class Player:
             #   Reset Head Pos
             self.headPos = self.bodyCoordinates[0]
     
-    def collidesFood(self, foodObj):
+    def collidesFood(self,score, foodObj):
         if self.headPos == [foodObj.x, foodObj.y]:
+            score += 5
             foodObj.changeFoodPos()
             self.increaseLength()
+            assets.eatSound()
+        return score
             
-    def gameOver(self, tile, width, height):
+    def isGameOver(self, tile, width, height):
+        
+        #   Collision with body        
         for item in self.bodyCoordinates[1:]:
             if item == self.bodyCoordinates[0]:
-                print("Game Over") 
+                return True
                 
+                
+        #   Out of bounds
         [headX, headY] = self.headPos
-        if (headX < 20 or headX>(width - tile)):
-            print("Game Over 2")
+        if (headX < 20 or headX>(width - 2 * tile)):
+            return True
             
-        if (headY < 20 or headY>(height - tile)):
-            print("Game Over 3")
+            
+        if (headY < 20 or headY>(height - 2 * tile)):
+            return True
+            
