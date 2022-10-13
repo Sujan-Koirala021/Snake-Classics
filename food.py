@@ -1,17 +1,15 @@
 import pygame
 from pygame.locals import *
 
-
 import random
 
-
 class Food:
-    color = (255, 0 , 255)
+    color = (255, 255 , 0)
     (width, height) = (20, 20) 
+    
     def __init__(self):
         (self.x , self.y) = (random.randrange(20, 800 - 40, 20), random.randrange(20,  600 - 40, 20))
 
-        
     def changeFoodPos(self):
         (self.x , self.y) = (random.randrange(20, 800 - 40, 20), random.randrange(20,  600 - 40, 20))
         

@@ -20,6 +20,8 @@ class Player:
         self.newDirection = "down" 
         
     def moveSnake(self):
+        
+        # Delete last element of list and insert to first position as per direction
         if (self.direction == "right"):
             del self.bodyCoordinates[-1]
             self.bodyCoordinates.insert(0, [self.headPos[0] + self.velocity, self.headPos[1]])
@@ -45,14 +47,14 @@ class Player:
             self.headPos = self.bodyCoordinates[0]
 
     def drawSnake(self, surface):
-        green = (0, 255, 0)
-        red = (255, 0, 0)
+        bodyColor = (2, 70, 22)
+        headColor = (3, 4, 120)
 
         for item in self.bodyCoordinates:
             if (item == self.bodyCoordinates[0]):
-                color = red
+                color = headColor
             else:
-                color = green
+                color = bodyColor
             pygame.draw.rect(surface, color, pygame.Rect(item[0],item[1], 20, 20)) #   20 width and height
         
     def increaseLength(self):
@@ -77,6 +79,8 @@ class Player:
             self.headPos = self.bodyCoordinates[0]
     
     def collidesFood(self,score, foodObj):
+        
+        #   if head and food have same co-ordinates
         if self.headPos == [foodObj.x, foodObj.y]:
             score += 5
             foodObj.changeFoodPos()
@@ -96,7 +100,6 @@ class Player:
         [headX, headY] = self.headPos
         if (headX < 20 or headX>(width - 2 * tile)):
             return True
-            
             
         if (headY < 20 or headY>(height - 2 * tile)):
             return True

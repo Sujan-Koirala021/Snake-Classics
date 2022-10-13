@@ -1,3 +1,5 @@
+#   Sound and Text Assets
+
 import pygame
 
 def eatSound():

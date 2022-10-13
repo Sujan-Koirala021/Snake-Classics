@@ -1,11 +1,11 @@
-from re import T
-from winsound import PlaySound
 import pygame, sys
 import time
 #  Import window.py
 import window, food, player, assets
 
 from pygame.locals import *
+
+
 (WIDTH, HEIGHT) = (800, 600)
 TILE = 20
 SCORE = 0
@@ -14,22 +14,20 @@ SCORE = 0
 clock = pygame.time.Clock()
 fps = 15
 
-lastTime = time.time()
-
-#   Set window
+#   Set the window
 window.setWindow()
 
+#   Instantiate objecst
 snake = player.Player()
-
 food = food.Food()
 
+#   Flags
 running = True
 isGameOver = False
-
 playSound = True
 
 def drawBoundary():
-    boundaryColor = (25, 100, 255)
+    boundaryColor = (145, 21, 64)
     pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0,0, WIDTH- TILE, 20)) #   20 width and height
     pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0, HEIGHT - TILE, WIDTH, 20)) #   20 width and height
     pygame.draw.rect(window.getWindow(), boundaryColor, pygame.Rect(0,0, 20, HEIGHT)) #   20 width and height
@@ -37,7 +35,10 @@ def drawBoundary():
 
 
 while(running):
+    
     if (isGameOver):
+        
+        # Play just once
         if playSound:
             assets.gameOverSound()
             playSound = False
@@ -50,13 +51,18 @@ while(running):
     else:
         window.getWindow().fill((0, 0, 0 ))
         
-        
         drawBoundary()
+        #   Text over boundary
         assets.showText(window.getWindow(), f'Score : {SCORE}', 650, 10, 15)
+
         food.drawFood(window.getWindow())
+        
+        # Track snake
         snake.drawSnake(window.getWindow())
         snake.moveSnake()
         SCORE = snake.collidesFood(SCORE, food)
+        
+        # Check for gameover
         isGameOver = snake.isGameOver(TILE, WIDTH, HEIGHT)
 
     for event in pygame.event.get():
@@ -86,12 +92,14 @@ while(running):
             if snake.direction != "up":
                 snake.direction = snake.newDirection
 
+        # Play Again
         if user_input[K_SPACE] and isGameOver == True:
             isGameOver = False
             snake.resetSnake()
             playSound = True
             SCORE = 0
             
+        # Quit
         if user_input[K_q]:
             running = False
 
